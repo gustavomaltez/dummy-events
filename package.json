@@ -3,6 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "test": "jest --passWithNoTests --no-cache --verbose --runInBand",
+    "test:watch": "yarn test --watch",
+    "test:staged": "yarn test --findRelatedTests",
+    "test:ci": "yarn test --coverage",
+    "lint:all": "eslint src/** --fix"
+  },
   "devDependencies": {
     "@types/jest": "^27.4.0",
     "@types/node": "^17.0.6",
