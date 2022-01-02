@@ -28,4 +28,11 @@ describe('Guest', () => {
     guest.confirmPresence();
     expect(guest.isPresenceConfirmed()).toBe(true);
   });
+
+  test('Should be able to disconfirm presence', () => {
+    const { guest } = buildSystemUnderTest();
+
+    guest.disconfirmPresence();
+    expect(guest.isPresenceConfirmed()).toBe(false);
+  });
 });
