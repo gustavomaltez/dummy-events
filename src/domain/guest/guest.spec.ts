@@ -21,4 +21,11 @@ describe('Guest', () => {
 
     expect(guest.isPresenceConfirmed()).toBe(false);
   });
+
+  test('Should be able to confirm presence', () => {
+    const { guest } = buildSystemUnderTest();
+
+    guest.confirmPresence();
+    expect(guest.isPresenceConfirmed()).toBe(true);
+  });
 });
