@@ -13,6 +13,10 @@ class Guest extends Person {
     this.confirmedPresence = true;
   }
 
+  public disconfirmPresence() {
+    this.confirmedPresence = false;
+  }
+
   public isPresenceConfirmed() {
     return this.confirmedPresence;
   }
