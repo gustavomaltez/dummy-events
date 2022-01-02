@@ -1,24 +1,24 @@
 import { Person } from '../person/person';
 
 class Guest extends Person {
-  private confirmedPresence: boolean;
+  private isPresenceConfirmed: boolean;
 
   constructor(firstName: string, lastName: string, birthDate: Date) {
     super(firstName, lastName, birthDate);
 
-    this.confirmedPresence = false;
+    this.isPresenceConfirmed = false;
   }
 
   public confirmPresence() {
-    this.confirmedPresence = true;
+    this.isPresenceConfirmed = true;
   }
 
   public disconfirmPresence() {
-    this.confirmedPresence = false;
+    this.isPresenceConfirmed = false;
   }
 
-  public isPresenceConfirmed() {
-    return this.confirmedPresence;
+  public getIsPresenceConfirmed() {
+    return this.isPresenceConfirmed;
   }
 }
 

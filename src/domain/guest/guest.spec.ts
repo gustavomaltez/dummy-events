@@ -19,20 +19,20 @@ describe('Guest', () => {
   test('Should be not confirmed presence by default', () => {
     const { guest } = buildSystemUnderTest();
 
-    expect(guest.isPresenceConfirmed()).toBe(false);
+    expect(guest.getIsPresenceConfirmed()).toBe(false);
   });
 
   test('Should be able to confirm presence', () => {
     const { guest } = buildSystemUnderTest();
 
     guest.confirmPresence();
-    expect(guest.isPresenceConfirmed()).toBe(true);
+    expect(guest.getIsPresenceConfirmed()).toBe(true);
   });
 
   test('Should be able to disconfirm presence', () => {
     const { guest } = buildSystemUnderTest();
 
     guest.disconfirmPresence();
-    expect(guest.isPresenceConfirmed()).toBe(false);
+    expect(guest.getIsPresenceConfirmed()).toBe(false);
   });
 });
