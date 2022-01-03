@@ -3,7 +3,7 @@ import {
   RegisterUser,
   UserRegisterParams,
 } from '@/domain/usecases/create-user';
-import { RegisterUserOnLocalStorage } from './register-user-on-local-storage';
+import { RegisterUserLocally } from './register-user-locally';
 import { UserRepositorySpy } from '@/data/tests/repositories/user/mock-user-repository';
 import { IdGeneratorSpy } from '@/data/tests/services/id/mock-id-generator';
 import { mockUserRegisterParams } from '@/domain/tests/usecases/mock-register-user-params';
@@ -20,7 +20,7 @@ const buildSystemUnderTest = (): SystemUnderTestTypes => {
   const fakeUserParams = mockUserRegisterParams();
   const userRepositorySpy = new UserRepositorySpy();
   const idGeneratorSpy = new IdGeneratorSpy();
-  const systemUnderTest = new RegisterUserOnLocalStorage(
+  const systemUnderTest = new RegisterUserLocally(
     userRepositorySpy,
     idGeneratorSpy,
   );
@@ -28,7 +28,7 @@ const buildSystemUnderTest = (): SystemUnderTestTypes => {
   return { idGeneratorSpy, systemUnderTest, userRepositorySpy, fakeUserParams };
 };
 
-describe('RegisterUserOnLocalStorage', () => {
+describe('RegisterUserLocally', () => {
   test('Should call id generator only once', async () => {
     const { systemUnderTest, idGeneratorSpy, fakeUserParams } =
       buildSystemUnderTest();

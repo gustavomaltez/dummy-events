@@ -7,7 +7,7 @@ import {
   UserRegisterParams,
 } from '@/domain/usecases/create-user';
 
-class RegisterUserOnLocalStorage implements RegisterUser {
+class RegisterUserLocally implements RegisterUser {
   constructor(
     private readonly repository: UserRepository,
     private readonly idGenerator: IdGenerator,
@@ -28,4 +28,4 @@ class RegisterUserOnLocalStorage implements RegisterUser {
   }
 }
 
-export { RegisterUserOnLocalStorage };
+export { RegisterUserLocally };
