@@ -95,4 +95,20 @@ describe('RegisterUserOnLocalStorage', () => {
     await expect(promise).rejects.toThrow(new InvalidUserBirthDate());
     mockdate.reset();
   });
+
+  test("Should throw InvalidUserBirthDate if user birth date is equal than today's date", async () => {
+    const { systemUnderTest, fakeUserParams } = buildSystemUnderTest();
+
+    mockdate.set(new Date());
+
+    const userParams: UserRegisterParams = {
+      ...fakeUserParams,
+      birthDate: new Date(),
+    };
+
+    const promise = systemUnderTest.register(userParams);
+
+    await expect(promise).rejects.toThrow(new InvalidUserBirthDate());
+    mockdate.reset();
+  });
 });
