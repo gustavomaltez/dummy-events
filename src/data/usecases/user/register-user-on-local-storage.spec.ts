@@ -1,3 +1,4 @@
+import mockdate from 'mockdate';
 import {
   RegisterUser,
   UserRegisterParams,
@@ -6,6 +7,7 @@ import { RegisterUserOnLocalStorage } from './register-user-on-local-storage';
 import { UserRepositorySpy } from '@/data/tests/repositories/user/mock-user-repository';
 import { IdGeneratorSpy } from '@/data/tests/services/id/mock-id-generator';
 import { mockUserRegisterParams } from '@/domain/tests/usecases/mock-register-user-params';
+import { InvalidUserBirthDate } from '@/domain/errors';
 
 type SystemUnderTestTypes = {
   systemUnderTest: RegisterUser;
@@ -76,5 +78,21 @@ describe('RegisterUserOnLocalStorage', () => {
     await systemUnderTest.register(fakeUserParams);
 
     expect(userRepositorySpy.addedUserCount).toEqual(1);
+  });
+
+  test("Should throw InvalidUserBirthDate if user birth date is bigger than today's date", async () => {
+    const { systemUnderTest, fakeUserParams } = buildSystemUnderTest();
+
+    mockdate.set(new Date());
+
+    const userParams: UserRegisterParams = {
+      ...fakeUserParams,
+      birthDate: new Date(Date.now() + 1),
+    };
+
+    const promise = systemUnderTest.register(userParams);
+
+    await expect(promise).rejects.toThrow(new InvalidUserBirthDate());
+    mockdate.reset();
   });
 });
