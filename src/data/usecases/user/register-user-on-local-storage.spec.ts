@@ -111,4 +111,16 @@ describe('RegisterUserOnLocalStorage', () => {
     await expect(promise).rejects.toThrow(new InvalidUserBirthDate());
     mockdate.reset();
   });
+
+  test('Should returns an user if the user birth date is valid', async () => {
+    const { systemUnderTest, fakeUserParams, idGeneratorSpy } =
+      buildSystemUnderTest();
+
+    const user = await systemUnderTest.register(fakeUserParams);
+
+    expect(user).toEqual({
+      ...fakeUserParams,
+      id: idGeneratorSpy.id,
+    });
+  });
 });
