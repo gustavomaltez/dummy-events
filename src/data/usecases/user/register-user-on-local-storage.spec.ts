@@ -80,7 +80,7 @@ describe('RegisterUserOnLocalStorage', () => {
     expect(userRepositorySpy.addedUserCount).toEqual(1);
   });
 
-  test("Should throw InvalidUserBirthDate if user birth date is bigger than today's date", async () => {
+  test("Should throw InvalidUserBirthDate if user birth date is greater than today's date", async () => {
     const { systemUnderTest, fakeUserParams } = buildSystemUnderTest();
 
     mockdate.set(new Date());
