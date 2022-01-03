@@ -1,37 +1,11 @@
-/* eslint-disable max-classes-per-file */
 import faker from 'faker';
-import { UserRepository } from '@/data/repositories/user/user-repository';
 import { IdGenerator } from '@/data/services/id/id-generator';
-import { UserModel } from '@/domain/models';
 import {
   RegisterUser,
   UserRegisterParams,
 } from '@/domain/usecases/create-user';
 import { RegisterUserOnLocalStorage } from './register-user-on-local-storage';
-
-class UserRepositorySpy implements UserRepository {
-  public addedUser: UserModel | undefined;
-
-  public addedUserCount: number = 0;
-
-  add(user: UserModel): Promise<void> {
-    this.addedUser = user;
-    this.addedUserCount += 1;
-    return Promise.resolve();
-  }
-
-  remove(userId: string): Promise<UserModel> {
-    return Promise.resolve({} as UserModel);
-  }
-
-  findOne(userId: string): Promise<UserModel> {
-    return Promise.resolve({} as UserModel);
-  }
-
-  findAll(): Promise<UserModel[]> {
-    return Promise.resolve([]);
-  }
-}
+import { UserRepositorySpy } from '@/data/repositories/user/tests/mock-user-repository';
 
 class IdGeneratorSpy implements IdGenerator {
   public id = faker.datatype.uuid();
