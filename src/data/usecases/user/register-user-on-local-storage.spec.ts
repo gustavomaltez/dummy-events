@@ -1,22 +1,11 @@
-import faker from 'faker';
-import { IdGenerator } from '@/data/services/id/id-generator';
 import {
   RegisterUser,
   UserRegisterParams,
 } from '@/domain/usecases/create-user';
 import { RegisterUserOnLocalStorage } from './register-user-on-local-storage';
-import { UserRepositorySpy } from '@/data/repositories/user/tests/mock-user-repository';
-
-class IdGeneratorSpy implements IdGenerator {
-  public id = faker.datatype.uuid();
-
-  public callsCount: number = 0;
-
-  generateId(): string {
-    this.callsCount += 1;
-    return this.id;
-  }
-}
+import { UserRepositorySpy } from '@/data/tests/repositories/user/mock-user-repository';
+import { IdGeneratorSpy } from '@/data/tests/services/id/mock-id-generator';
+import { mockUserRegisterParams } from '@/domain/tests/usecases/mock-register-user-params';
 
 type SystemUnderTestTypes = {
   systemUnderTest: RegisterUser;
@@ -26,18 +15,13 @@ type SystemUnderTestTypes = {
 };
 
 const buildSystemUnderTest = (): SystemUnderTestTypes => {
+  const fakeUserParams = mockUserRegisterParams();
   const userRepositorySpy = new UserRepositorySpy();
   const idGeneratorSpy = new IdGeneratorSpy();
   const systemUnderTest = new RegisterUserOnLocalStorage(
     userRepositorySpy,
     idGeneratorSpy,
   );
-
-  const fakeUserParams: UserRegisterParams = {
-    birthDate: faker.date.between('01/01/1990', '01/01/2020'),
-    firstName: faker.name.firstName(),
-    lastName: faker.name.lastName(),
-  };
 
   return { idGeneratorSpy, systemUnderTest, userRepositorySpy, fakeUserParams };
 };

@@ -1,5 +1,5 @@
 import { UserModel } from '@/domain/models';
-import { UserRepository } from '../user-repository';
+import { UserRepository } from '../../../repositories/user/user-repository';
 
 class UserRepositorySpy implements UserRepository {
   public addedUser: UserModel | undefined;
